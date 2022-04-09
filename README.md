@@ -6,4 +6,7 @@ This is my dotfiles setup.
 * zsh
 * i3
 
-I'm using [chezmoi](https://www.chezmoi.io/) to sync dotfiles across machines and to setup any new machines
+Now using gnu stow!
+
+To install completion for commands:
+`gh completion -s zsh > ~/.local/share/zsh/site-functions/_gh`
