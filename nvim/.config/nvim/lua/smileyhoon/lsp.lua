@@ -6,10 +6,10 @@ local source_mapping = {
 	cmp_tabnine = "[TN]",
 	path = "[Path]",
 }
-local lspkind = require("lspkind")
-require('lspkind').init({
-    with_text = true,
-})
+-- local lspkind = require("lspkind")
+-- require('lspkind').init({
+--     with_text = true,
+-- })
 
 cmp.setup({
 	snippet = {
@@ -27,7 +27,7 @@ cmp.setup({
 	},
     formatting = {
         format = function(entry, vim_item)
-            vim_item.kind = lspkind.presets.default[vim_item.kind]
+            -- vim_item.kind = lspkind.presets.default[vim_item.kind]
             local menu = source_mapping[entry.source.name]
             if entry.source.name == 'cmp_tabnine' then
                 if entry.completion_item.data ~= nil and entry.completion_item.data.detail ~= nil then
@@ -40,7 +40,7 @@ cmp.setup({
         end
     },
 	sources = {
-		{ name = "cpm_tabnine" },
+		{ name = "cmp_tabnine" },
 		{ name = "nvim_lsp" },
 		{ name = "luasnip" },
 		{ name = "buffer" },
@@ -165,3 +165,10 @@ require('lspconfig').tsserver.setup(config())
 require('lspconfig').yamlls.setup(config())
 
 require('lspconfig').sqlls.setup(config())
+
+require('lspconfig').html.setup(config())
+
+require('lspconfig').terraformls.setup(config({
+    filetypes = { "terraform", "tf" }
+}))
+

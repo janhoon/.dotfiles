@@ -2,7 +2,7 @@ syntax on
 
 set nocompatible
 set nu rnu
-set hlsearch
+set nohlsearch
 set tabstop=4
 set shiftwidth=4
 set expandtab
@@ -18,6 +18,11 @@ set wildignore+=**/node_modules/*
 set wildignore+=**/.git/*
 set wildignore+=**/vendor/*
 
+set foldmethod=indent   
+set foldnestmax=10
+set nofoldenable
+set foldlevel=2
+
 " Plugins
 call plug#begin('~/.vim/plugged')
 
@@ -28,11 +33,13 @@ Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
 Plug 'onsails/lspkind-nvim'
-" Plug 'github/copilot.vim'
+Plug 'github/copilot.vim'
 Plug 'nvim-lua/lsp_extensions.nvim'
 Plug 'glepnir/lspsaga.nvim'
 Plug 'simrat39/symbols-outline.nvim'
 Plug 'ray-x/lsp_signature.nvim'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'cappyzawa/starlark.vim'
 
 " DBs
 Plug 'tpope/vim-dadbod'
@@ -64,6 +71,9 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
+
+" replace everything
+Plug 'windwp/nvim-spectre'
 
 " other
 Plug 'tpope/vim-surround'

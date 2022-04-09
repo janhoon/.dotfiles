@@ -3,6 +3,7 @@ require("smileyhoon.lsp")
 require("smileyhoon.telescope")
 require("smileyhoon.lualine")
 require("smileyhoon.theme")
+require("smileyhoon.spectre")
 
 P = function(v)
   print(vim.inspect(v))
