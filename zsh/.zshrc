@@ -1,5 +1,6 @@
-source ~/.zpluggs/zsh-snap/znap.zsh
-export ZSH="/Users/jan.hoon/.oh-my-zsh"
+zstyle ':znap:*' repos-dir ~/.znap
+source ~/zsh-snap/znap.zsh
+export ZSH="/home/janhoon/.oh-my-zsh"
 
 ZSH_THEME="robbyrussell"
 
@@ -45,4 +46,3 @@ unset __conda_setup
 
 autoload -U compinit
 compinit -i
-
