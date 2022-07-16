@@ -123,7 +123,10 @@ end
 
 
 require("lspconfig").gopls.setup(config({
-    on_attach = on_attach
+    on_attach = on_attach,
+    settings = { gopls =  {
+        buildFlags =  {"-tags=integration,unit,acceptance,link,zelda"}
+    }}
 }))
 
 local tabnine = require('cmp_tabnine.config')
