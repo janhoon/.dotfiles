@@ -10,14 +10,15 @@ znap source marlonrichert/zsh-autocomplete
 znap source zsh-users/zsh-autosuggestions
 
 source $ZSH/oh-my-zsh.sh
-# source <(kubectl completion zsh)
-eval $(gh completion -s zsh)
 
 alias vim=nvim
 alias sleeplock="i3lock && echo mem > /sys/power/state"
 alias k=kubectl
 alias cona='conda activate ${PWD##*/}'
 alias conc='conda create -n ${PWD##*/}'
+
+eval $(kubectl completion zsh)
+eval $(gh completion -s zsh)
  
 eval $(thefuck --alias)
 
@@ -49,3 +50,8 @@ compinit -i
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 source /home/janhoon/.gvm/scripts/gvm
+
+# OCTAVIA CLI 0.40.4
+OCTAVIA_ENV_FILE=/home/janhoon/.octavia
+export OCTAVIA_ENABLE_TELEMETRY=False
+alias octavia="docker run -i --rm -v \$(pwd):/home/octavia-project --network host --env-file \${OCTAVIA_ENV_FILE} --user \$(id -u):\$(id -g) airbyte/octavia-cli:0.40.4"

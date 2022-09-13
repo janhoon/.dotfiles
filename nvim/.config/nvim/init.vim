@@ -31,7 +31,6 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/nvim-cmp'
-Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
 Plug 'onsails/lspkind-nvim'
 Plug 'github/copilot.vim'
 Plug 'nvim-lua/lsp_extensions.nvim'
@@ -40,6 +39,7 @@ Plug 'simrat39/symbols-outline.nvim'
 Plug 'ray-x/lsp_signature.nvim'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'cappyzawa/starlark.vim'
+Plug 'towolf/vim-helm'
 
 " DBs
 Plug 'tpope/vim-dadbod'
@@ -77,6 +77,7 @@ Plug 'windwp/nvim-spectre'
 
 " other
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
 
 call plug#end()
 
