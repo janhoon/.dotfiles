@@ -42,16 +42,8 @@ Plug 'cappyzawa/starlark.vim'
 Plug 'towolf/vim-helm'
 Plug 'pantharshit00/vim-prisma'
 
-" DBs
-Plug 'tpope/vim-dadbod'
-Plug 'kristijanhusak/vim-dadbod-ui'
-
 " Git
 Plug 'tpope/vim-fugitive'
-
-" Snippets
-Plug 'L3MON4D3/LuaSnip'
-Plug 'rafamadriz/friendly-snippets'
 
 " pretty
 Plug 'sbdchd/neoformat'
