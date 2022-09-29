@@ -40,6 +40,7 @@ Plug 'ray-x/lsp_signature.nvim'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'cappyzawa/starlark.vim'
 Plug 'towolf/vim-helm'
+Plug 'pantharshit00/vim-prisma'
 
 " DBs
 Plug 'tpope/vim-dadbod'

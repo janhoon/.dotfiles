@@ -1,13 +1,19 @@
-zstyle ':znap:*' repos-dir ~/.znap
-source ~/zsh-snap/znap.zsh
-export ZSH="/home/janhoon/.oh-my-zsh"
+export ZSH="/Users/jan.hoon/.oh-my-zsh"
 
 ZSH_THEME="robbyrussell"
 
 plugins=(git)
 
+# Download Znap, if it's not there yet.
+[[ -f ~/Git/zsh-snap/znap.zsh ]] ||
+    git clone --depth 1 -- \
+        https://github.com/marlonrichert/zsh-snap.git ~/Git/zsh-snap
+
+source ~/Git/zsh-snap/znap.zsh  # Start Znap
+
 znap source marlonrichert/zsh-autocomplete
 znap source zsh-users/zsh-autosuggestions
+znap source zsh-users/zsh-syntax-highlighting
 
 source $ZSH/oh-my-zsh.sh
 
@@ -48,10 +54,6 @@ unset __conda_setup
 autoload -U compinit
 compinit -i
 
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-source /home/janhoon/.gvm/scripts/gvm
+# eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+source /Users/jan.hoon/.gvm/scripts/gvm
 
-# OCTAVIA CLI 0.40.4
-OCTAVIA_ENV_FILE=/home/janhoon/.octavia
-export OCTAVIA_ENABLE_TELEMETRY=False
-alias octavia="docker run -i --rm -v \$(pwd):/home/octavia-project --network host --env-file \${OCTAVIA_ENV_FILE} --user \$(id -u):\$(id -g) airbyte/octavia-cli:0.40.4"
