@@ -11,7 +11,6 @@ plugins=(git)
 
 source ~/Git/zsh-snap/znap.zsh  # Start Znap
 
-znap source marlonrichert/zsh-autocomplete
 znap source zsh-users/zsh-autosuggestions
 znap source zsh-users/zsh-syntax-highlighting
 
@@ -22,6 +21,7 @@ alias sleeplock="i3lock && echo mem > /sys/power/state"
 alias k=kubectl
 alias cona='conda activate ${PWD##*/}'
 alias conc='conda create -n ${PWD##*/}'
+alias gocov="go test --short -coverprofile=coverage.out -tags=unit ./... && go tool cover -html=coverage.out && rm coverage.out"
 
 eval $(kubectl completion zsh)
 eval $(gh completion -s zsh)
@@ -31,6 +31,8 @@ eval $(thefuck --alias)
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin:/usr/local/go/bin:/$HOME/bin
 export COLORTERM=truecolor
+export KIND_EXPERIMENTAL_PROVIDER=podman
+
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -38,14 +40,14 @@ export NVM_DIR="$HOME/.nvm"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/janhoon/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/opt/homebrew/Caskroom/miniconda/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/janhoon/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/janhoon/miniconda3/etc/profile.d/conda.sh"
+    if [ -f "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh" ]; then
+        . "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh"
     else
-        export PATH="/home/janhoon/miniconda3/bin:$PATH"
+        export PATH="/opt/homebrew/Caskroom/miniconda/base/bin:$PATH"
     fi
 fi
 unset __conda_setup

@@ -1,16 +1,29 @@
+local glyphs = {}
+
+local installed, circles = pcall(require, 'circles')
+if installed then
+  circles.setup({ icons = { empty = '', filled = '', lsp_prefix = '' } })
+  glyphs = circles.get_nvimtree_glyphs()
+end
+
+glyphs.git = {
+  unstaged = '',
+  staged = '',
+  unmerged = '',
+  renamed = '',
+  untracked = '',
+  deleted = '',
+  ignored = '◌',
+}
+
 require'nvim-tree'.setup {
   disable_netrw       = true,
   hijack_netrw        = true,
   open_on_setup       = false,
   ignore_ft_on_setup  = {},
-  auto_close          = false,
   open_on_tab         = false,
   hijack_cursor       = false,
   update_cwd          = false,
-  update_to_buf_dir   = {
-    enable = true,
-    auto_open = true,
-  },
   diagnostics = {
     enable = false,
     icons = {
@@ -40,21 +53,32 @@ require'nvim-tree'.setup {
   },
   view = {
     width = 30,
-    height = 30,
     hide_root_folder = false,
     side = 'left',
-    auto_resize = false,
     mappings = {
       custom_only = false,
       list = {}
     },
-    number = false,
-    relativenumber = false,
-    signcolumn = "yes"
+    number = true,
+    relativenumber = true,
+    signcolumn = "no"
   },
   trash = {
     cmd = "trash",
     require_confirm = true
+  },
+  renderer = {
+      group_empty = true,
+      highlight_opened_files = "name",
+      special_files = {
+        ["README.md"] = true,
+        ["Makefile"] = true,
+        ["MAKEFILE"] = true,
+      },
+      root_folder_modifier = ":t",
+      icons = {
+          glyphs = glyphs
+      }
   }
 }
 

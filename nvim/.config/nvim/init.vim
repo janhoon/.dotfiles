@@ -41,17 +41,25 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'cappyzawa/starlark.vim'
 Plug 'towolf/vim-helm'
 Plug 'pantharshit00/vim-prisma'
+Plug 'L3MON4D3/LuaSnip'
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/nvim-treesitter-context'
+Plug 'hashivim/vim-terraform'
 
 " Git
 Plug 'tpope/vim-fugitive'
+Plug 'skanehira/denops-gh.vim'
 
 " pretty
 Plug 'sbdchd/neoformat'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'dense-analysis/ale'
 
 " theme
-Plug 'gruvbox-community/gruvbox'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
+Plug 'luochen1990/rainbow'
+Plug 'projekt0n/github-nvim-theme'
 
 " testing
 Plug 'vim-test/vim-test'
@@ -75,7 +83,9 @@ Plug 'tpope/vim-commentary'
 call plug#end()
 
 set background=dark " or light if you want light mode
-colorscheme gruvbox
+colorscheme github_dimmed
+
+let g:rainbow_active = 1
 
 lua require("smileyhoon")
 
