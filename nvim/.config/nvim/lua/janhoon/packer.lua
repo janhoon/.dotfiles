@@ -35,6 +35,11 @@ return require('packer').startup(function(use)
         run = ':TSUpdate'
     })
 
+    use {
+      'nvim-lualine/lualine.nvim',
+      requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+    }
+
     use("tpope/vim-fugitive")
     use("theprimeagen/harpoon")
     use("github/copilot.vim")
