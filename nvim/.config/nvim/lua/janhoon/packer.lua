@@ -41,9 +41,23 @@ return require('packer').startup(function(use)
     }
 
     use("tpope/vim-fugitive")
+    use("tpope/vim-commentary")
+
     use("theprimeagen/harpoon")
     use("github/copilot.vim")
     use("EdenEast/nightfox.nvim")
     use("sbdchd/neoformat")
-    use("vim-test/vim-test")
+    use {
+      "nvim-neotest/neotest",
+      requires = {
+        "nvim-lua/plenary.nvim",
+        "nvim-treesitter/nvim-treesitter",
+        "antoinemadec/FixCursorHold.nvim",
+        "vim-test/vim-test",
+        "nvim-neotest/neotest-vim-test",
+        'marilari88/neotest-vitest',
+      }
+    }
+    use("mfussenegger/nvim-dap")
+    use("mfussenegger/nvim-jdtls")
 end)

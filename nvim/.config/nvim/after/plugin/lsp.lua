@@ -7,7 +7,9 @@ lsp.ensure_installed({
     'eslint',
     'sumneko_lua',
     'rust_analyzer',
+    'jsonls',
 })
+
 
 -- Fix Undefined global 'vim'
 lsp.configure('sumneko_lua', {
@@ -20,6 +22,24 @@ lsp.configure('sumneko_lua', {
     }
 })
 
+lsp.configure('jsonls', {
+    filetypes = { 'json', 'jsonc', 'avsc' }
+})
+
+local java_bundles = {
+    vim.fn.glob("$HOME/.config/nvim/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar", 1),
+}
+vim.list_extend(java_bundles, vim.split(vim.fn.glob("$HOME/.config/nvim/vscode-java-test/server/*.jar", 1), "\n"))
+lsp.configure('jdtls', {
+    init_options = {
+        bundles = java_bundles;
+    },
+    on_attach = function(client, bufnr)
+        local jdtls = require("jdtls")
+        jdtls.setup_dap({ hotcodereplace = 'auto' })
+        jdtls.setup.add_commands()
+    end
+})
 
 local cmp = require('cmp')
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
@@ -51,6 +71,21 @@ lsp.set_preferences({
 
 lsp.on_attach(function(client, bufnr)
     local opts = { buffer = bufnr, remap = false }
+    local neotest = require('neotest')
+
+    vim.keymap.set("n", "<leader>tt", neotest.run.run, {noremap = true})
+    vim.keymap.set("n", "<leader>tT", function () neotest.run.run(vim.fn.expand("%")) end, {noremap = true})
+    vim.keymap.set("n", "<leader>td", function () neotest.run.run({strategy = "dap"}) end, {noremap = true})
+    vim.keymap.set("n", "<leader>tD", function () neotest.run.run({vim.fn.expand("%"), strategy = "dap"}) end, {noremap = true})
+
+    -- only map keys if the client is java
+    if client.name == "jdtls" then
+        local jdtls = require("jdtls")
+        jdtls.setup_dap({ hotcodereplace = 'auto' })
+        require("jdtls.dap").setup_dap_main_class_configs()
+        vim.keymap.set('n', '<leader>tt', jdtls.test_nearest_method, opts)
+        vim.keymap.set('n', '<leader>tT', jdtls.test_class, opts)
+    end
 
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)

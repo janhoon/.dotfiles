@@ -1,2 +1,11 @@
-vim.keymap.set("n", "<leader>t", ":TestNearest<CR>", {noremap = true})
-vim.keymap.set("n", "<leader>T", ":TestFile<CR>", {noremap = true})
+local neotest = require('neotest')
+local adapter_vim_test = require("neotest-vim-test")
+local adapter_vitest = require("neotest-vitest")
+
+neotest.setup({
+    adapters = {
+        adapter_vitest,
+        adapter_vim_test({ignore_filetypes = {"markdown", "lua"}})
+    },
+})
+
