@@ -60,4 +60,35 @@ return require('packer').startup(function(use)
     }
     use("mfussenegger/nvim-dap")
     use("mfussenegger/nvim-jdtls")
+    use {
+        "windwp/nvim-spectre",
+        requires = { "nvim-lua/plenary.nvim" }
+    }
+
+    use {
+        "towolf/vim-helm",
+        ft = { "yaml", "helm" },
+    }
+
+    use {
+        "fatih/vim-go",
+        run = ":GoUpdateBinaries"
+    }
+
+    use("cappyzawa/starlark.vim")
+
+    use {
+        'nvim-tree/nvim-tree.lua',
+        requires = {
+            'nvim-tree/nvim-web-devicons', -- optional, for file icons
+        },
+    }
+
+    use {
+      "microsoft/vscode-js-debug",
+      opt = true,
+      run = "npm install --legacy-peer-deps && npm run compile",
+    }
+
+    use { "mxsdev/nvim-dap-vscode-js", requires = {"mfussenegger/nvim-dap"} }
 end)

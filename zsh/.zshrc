@@ -19,6 +19,7 @@ source $ZSH/oh-my-zsh.sh
 alias vim=nvim
 alias sleeplock="i3lock && echo mem > /sys/power/state"
 alias k=kubectl
+alias tf=terraform
 alias cona='conda activate ${PWD##*/}'
 alias conc='conda create -n ${PWD##*/}'
 alias gocov="go test --short -coverprofile=coverage.out -tags=unit ./... && go tool cover -html=coverage.out && rm coverage.out"
@@ -63,3 +64,5 @@ source /Users/jan.hoon/.gvm/scripts/gvm
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
+export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"

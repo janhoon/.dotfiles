@@ -179,6 +179,11 @@ _G.packer_plugins = {
     path = "/Users/jan.hoon/.local/share/nvim/site/pack/packer/start/nvim-dap",
     url = "https://github.com/mfussenegger/nvim-dap"
   },
+  ["nvim-dap-vscode-js"] = {
+    loaded = true,
+    path = "/Users/jan.hoon/.local/share/nvim/site/pack/packer/start/nvim-dap-vscode-js",
+    url = "https://github.com/mxsdev/nvim-dap-vscode-js"
+  },
   ["nvim-jdtls"] = {
     loaded = true,
     path = "/Users/jan.hoon/.local/share/nvim/site/pack/packer/start/nvim-jdtls",
@@ -188,6 +193,16 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/jan.hoon/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
+  },
+  ["nvim-spectre"] = {
+    loaded = true,
+    path = "/Users/jan.hoon/.local/share/nvim/site/pack/packer/start/nvim-spectre",
+    url = "https://github.com/windwp/nvim-spectre"
+  },
+  ["nvim-tree.lua"] = {
+    loaded = true,
+    path = "/Users/jan.hoon/.local/share/nvim/site/pack/packer/start/nvim-tree.lua",
+    url = "https://github.com/nvim-tree/nvim-tree.lua"
   },
   ["nvim-treesitter"] = {
     loaded = true,
@@ -210,6 +225,11 @@ _G.packer_plugins = {
     path = "/Users/jan.hoon/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
+  ["starlark.vim"] = {
+    loaded = true,
+    path = "/Users/jan.hoon/.local/share/nvim/site/pack/packer/start/starlark.vim",
+    url = "https://github.com/cappyzawa/starlark.vim"
+  },
   ["telescope.nvim"] = {
     loaded = true,
     path = "/Users/jan.hoon/.local/share/nvim/site/pack/packer/start/telescope.nvim",
@@ -225,14 +245,45 @@ _G.packer_plugins = {
     path = "/Users/jan.hoon/.local/share/nvim/site/pack/packer/start/vim-fugitive",
     url = "https://github.com/tpope/vim-fugitive"
   },
+  ["vim-go"] = {
+    loaded = true,
+    path = "/Users/jan.hoon/.local/share/nvim/site/pack/packer/start/vim-go",
+    url = "https://github.com/fatih/vim-go"
+  },
+  ["vim-helm"] = {
+    loaded = false,
+    needs_bufread = true,
+    only_cond = false,
+    path = "/Users/jan.hoon/.local/share/nvim/site/pack/packer/opt/vim-helm",
+    url = "https://github.com/towolf/vim-helm"
+  },
   ["vim-test"] = {
     loaded = true,
     path = "/Users/jan.hoon/.local/share/nvim/site/pack/packer/start/vim-test",
     url = "https://github.com/vim-test/vim-test"
+  },
+  ["vscode-js-debug"] = {
+    loaded = false,
+    needs_bufread = false,
+    path = "/Users/jan.hoon/.local/share/nvim/site/pack/packer/opt/vscode-js-debug",
+    url = "https://github.com/microsoft/vscode-js-debug"
   }
 }
 
 time([[Defining packer_plugins]], false)
+vim.cmd [[augroup packer_load_aucmds]]
+vim.cmd [[au!]]
+  -- Filetype lazy-loads
+time([[Defining lazy-load filetype autocommands]], true)
+vim.cmd [[au FileType yaml ++once lua require("packer.load")({'vim-helm'}, { ft = "yaml" }, _G.packer_plugins)]]
+vim.cmd [[au FileType helm ++once lua require("packer.load")({'vim-helm'}, { ft = "helm" }, _G.packer_plugins)]]
+time([[Defining lazy-load filetype autocommands]], false)
+vim.cmd("augroup END")
+vim.cmd [[augroup filetypedetect]]
+time([[Sourcing ftdetect script at: /Users/jan.hoon/.local/share/nvim/site/pack/packer/opt/vim-helm/ftdetect/helm.vim]], true)
+vim.cmd [[source /Users/jan.hoon/.local/share/nvim/site/pack/packer/opt/vim-helm/ftdetect/helm.vim]]
+time([[Sourcing ftdetect script at: /Users/jan.hoon/.local/share/nvim/site/pack/packer/opt/vim-helm/ftdetect/helm.vim]], false)
+vim.cmd("augroup END")
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then

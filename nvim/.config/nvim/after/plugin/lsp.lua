@@ -5,14 +5,12 @@ lsp.preset("recommended")
 lsp.ensure_installed({
     'tsserver',
     'eslint',
-    'sumneko_lua',
     'rust_analyzer',
     'jsonls',
 })
 
-
 -- Fix Undefined global 'vim'
-lsp.configure('sumneko_lua', {
+lsp.configure('lua-language-server', {
     settings = {
         Lua = {
             diagnostics = {
@@ -87,6 +85,13 @@ lsp.on_attach(function(client, bufnr)
         vim.keymap.set('n', '<leader>tT', jdtls.test_class, opts)
     end
 
+    if vim.bo[bufnr].buftype ~= "" or vim.bo[bufnr].filetype == "helm" then
+      vim.diagnostic.disable(bufnr)
+      vim.defer_fn(function()
+        vim.diagnostic.reset(nil, bufnr)
+      end, 1000)
+    end
+
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
     vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol, opts)
@@ -99,8 +104,62 @@ lsp.on_attach(function(client, bufnr)
     vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
 end)
 
+
+lsp.nvim_workspace()
+
 lsp.setup()
 
 vim.diagnostic.config({
     virtual_text = true,
 })
+
+local configs = require('lspconfig.configs')
+local lspconfig = require('lspconfig')
+local util = require('lspconfig.util')
+
+if not configs.helm_ls then
+  configs.helm_ls = {
+    default_config = {
+      cmd = {"helm_ls", "serve"},
+      filetypes = {'helm'},
+      root_dir = function(fname)
+        return util.root_pattern('Chart.yaml')(fname)
+      end,
+    },
+  }
+end
+
+lspconfig.helm_ls.setup {
+  filetypes = {"helm"},
+  cmd = {"helm_ls", "serve"},
+}
+
+lspconfig.yamlls.setup {
+    settings = {
+        yaml = {
+            format = { enable = true, singleQuote = true },
+            validate = true,
+            hover = true,
+            completion = true,
+            schemaStore = {
+                enable = true,
+                url = "https://www.schemastore.org/api/json/catalog.json",
+            },
+            schemas = {
+                ['http://json.schemastore.org/golangci-lint.json']      = '.golangci.{yml,yaml}',
+                ['http://json.schemastore.org/github-workflow.json']    = '.github/workflows/*.{yml,yaml}',
+                ['http://json.schemastore.org/github-action.json']      = '.github/action.{yml,yaml}',
+                ['http://json.schemastore.org/ansible-stable-2.9.json'] = 'roles/tasks/*.{yml,yaml}',
+                ['http://json.schemastore.org/ansible-playbook.json']   = 'playbook.{yml,yaml}',
+                ['http://json.schemastore.org/prettierrc.json']         = '.prettierrc.{yml,yaml}',
+                ['http://json.schemastore.org/stylelintrc.json']        = '.stylelintrc.{yml,yaml}',
+                ['http://json.schemastore.org/circleciconfig.json']     = '.circleci/**/*.{yml,yaml}',
+                ['http://json.schemastore.org/kustomization.json']      = 'kustomization.{yml,yaml}',
+                ['http://json.schemastore.org/helmfile.json']           = 'templates/**/*.{yml,yaml}',
+                ['http://json.schemastore.org/chart.json']              = 'Chart.yml,yaml}',
+                ['http://json.schemastore.org/gitlab-ci.json']          = '/*lab-ci.{yml,yaml}',
+                ['http://json.schemastore.org/tsconfig.json']          = 'tsconfig.{yml,yaml}',
+            }
+        }
+    }
+}

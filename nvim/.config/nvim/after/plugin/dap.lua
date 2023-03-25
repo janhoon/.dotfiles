@@ -24,3 +24,23 @@ vim.fn.sign_define('DapBreakpoint', {text='', texthl='Error', linehl='', numh
 vim.fn.sign_define('DapBreakpointCondition', {text='', texthl='Constant', linehl='', numhl=''})
 vim.fn.sign_define('DapLogPoint', {text='', texthl='String', linehl='', numhl=''})
 vim.fn.sign_define('DapStopped', {text='→', texthl='Identifier', linehl='', numhl=''})
+
+require("dap-vscode-js").setup({
+  adapters = { 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost' }, -- which adapters to register in nvim-dap
+})
+
+for _, language in ipairs({ "typescript", "javascript" }) do
+  require("dap").configurations[language] = {
+    {
+      type = "node",
+      request = "launch",
+      name = "Debug Current Test File",
+      autoAttachChildProcesses = true,
+      skipFiles = {"<node_internals>/**", "**/node_modules/**"},
+      program = "${workspaceRoot}/node_modules/vitest/vitest.mjs",
+      args = {"run", "${relativeFile}"},
+      smartStep = true,
+      console = "integratedTerminal"
+    }
+  }
+end
