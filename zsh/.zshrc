@@ -1,4 +1,4 @@
-export ZSH="/Users/jan.hoon/.oh-my-zsh"
+export ZSH="/Users/janhoon/.oh-my-zsh"
 
 ZSH_THEME="robbyrussell"
 
@@ -58,7 +58,7 @@ autoload -U compinit
 compinit -i
 
 # eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-source /Users/jan.hoon/.gvm/scripts/gvm
+source /Users/janhoon/.gvm/scripts/gvm
 
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!

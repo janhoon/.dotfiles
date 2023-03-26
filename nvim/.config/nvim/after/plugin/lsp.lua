@@ -24,6 +24,20 @@ lsp.configure('jsonls', {
     filetypes = { 'json', 'jsonc', 'avsc' }
 })
 
+lsp.configure('gopls', {
+    cmd_env = {
+        GOFLAGS = "-tags=integration,unit",
+    },
+})
+
+lsp.configure('golangcilsp', {
+    settings = {
+        buildFlags = {
+            '-tags="integration,unit"',
+        },
+    },
+})
+
 local java_bundles = {
     vim.fn.glob("$HOME/.config/nvim/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar", 1),
 }
@@ -75,6 +89,7 @@ lsp.on_attach(function(client, bufnr)
     vim.keymap.set("n", "<leader>tT", function () neotest.run.run(vim.fn.expand("%")) end, {noremap = true})
     vim.keymap.set("n", "<leader>td", function () neotest.run.run({strategy = "dap"}) end, {noremap = true})
     vim.keymap.set("n", "<leader>tD", function () neotest.run.run({vim.fn.expand("%"), strategy = "dap"}) end, {noremap = true})
+    vim.keymap.set("n", "<leader>to", neotest.output.open, {noremap = true})
 
     -- only map keys if the client is java
     if client.name == "jdtls" then

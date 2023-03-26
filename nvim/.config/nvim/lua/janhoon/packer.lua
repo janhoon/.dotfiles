@@ -50,12 +50,13 @@ return require('packer').startup(function(use)
     use {
       "nvim-neotest/neotest",
       requires = {
-        "nvim-lua/plenary.nvim",
-        "nvim-treesitter/nvim-treesitter",
-        "antoinemadec/FixCursorHold.nvim",
-        "vim-test/vim-test",
-        "nvim-neotest/neotest-vim-test",
+        -- "nvim-lua/plenary.nvim",
+        -- "nvim-treesitter/nvim-treesitter",
+        -- "antoinemadec/FixCursorHold.nvim",
+        -- "vim-test/vim-test",
+        -- "nvim-neotest/neotest-vim-test",
         'marilari88/neotest-vitest',
+        "nvim-neotest/neotest-go",
       }
     }
     use("mfussenegger/nvim-dap")
@@ -70,10 +71,10 @@ return require('packer').startup(function(use)
         ft = { "yaml", "helm" },
     }
 
-    use {
-        "fatih/vim-go",
-        run = ":GoUpdateBinaries"
-    }
+    -- use {
+    --     "fatih/vim-go",
+    --     run = ":GoUpdateBinaries"
+    -- }
 
     use("cappyzawa/starlark.vim")
 
@@ -84,11 +85,11 @@ return require('packer').startup(function(use)
         },
     }
 
-    use {
-      "microsoft/vscode-js-debug",
-      opt = true,
-      run = "npm install --legacy-peer-deps && npm run compile",
-    }
+    -- use {
+    --   "microsoft/vscode-js-debug",
+    --   opt = true,
+    --   run = "npm install --legacy-peer-deps && npm run compile",
+    -- }
 
-    use { "mxsdev/nvim-dap-vscode-js", requires = {"mfussenegger/nvim-dap"} }
+    -- use { "mxsdev/nvim-dap-vscode-js", requires = {"mfussenegger/nvim-dap"} }
 end)
