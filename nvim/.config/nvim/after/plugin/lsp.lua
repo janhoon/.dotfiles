@@ -10,15 +10,15 @@ lsp.ensure_installed({
 })
 
 -- Fix Undefined global 'vim'
-lsp.configure('lua-language-server', {
-    settings = {
-        Lua = {
-            diagnostics = {
-                globals = { 'vim' }
-            }
-        }
-    }
-})
+-- lsp.configure('lua-language-server', {
+--     settings = {
+--         Lua = {
+--             diagnostics = {
+--                 globals = { 'vim' }
+--             }
+--         }
+--     }
+-- })
 
 lsp.configure('jsonls', {
     filetypes = { 'json', 'jsonc', 'avsc' }
@@ -30,13 +30,13 @@ lsp.configure('gopls', {
     },
 })
 
-lsp.configure('golangcilsp', {
-    settings = {
-        buildFlags = {
-            '-tags="integration,unit"',
-        },
-    },
-})
+-- lsp.configure('golangcilsp', {
+--     settings = {
+--         buildFlags = {
+--             '-tags="integration,unit"',
+--         },
+--     },
+-- })
 
 local java_bundles = {
     vim.fn.glob("$HOME/.config/nvim/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar", 1),

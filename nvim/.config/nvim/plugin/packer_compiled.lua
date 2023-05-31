@@ -49,8 +49,8 @@ local function save_profiles(threshold)
 end
 
 time([[Luarocks path setup]], true)
-local package_path_str = "/Users/janhoon/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?.lua;/Users/janhoon/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?/init.lua;/Users/janhoon/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?.lua;/Users/janhoon/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?/init.lua"
-local install_cpath_pattern = "/Users/janhoon/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/lua/5.1/?.so"
+local package_path_str = "/home/janhoon/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?.lua;/home/janhoon/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?/init.lua;/home/janhoon/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?.lua;/home/janhoon/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?/init.lua"
+local install_cpath_pattern = "/home/janhoon/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/lua/5.1/?.so"
 if not string.find(package.path, package_path_str, 1, true) then
   package.path = package.path .. ';' .. package_path_str
 end
@@ -76,170 +76,170 @@ time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
   LuaSnip = {
     loaded = true,
-    path = "/Users/janhoon/.local/share/nvim/site/pack/packer/start/LuaSnip",
+    path = "/home/janhoon/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
   ["cmp-buffer"] = {
     loaded = true,
-    path = "/Users/janhoon/.local/share/nvim/site/pack/packer/start/cmp-buffer",
+    path = "/home/janhoon/.local/share/nvim/site/pack/packer/start/cmp-buffer",
     url = "https://github.com/hrsh7th/cmp-buffer"
   },
   ["cmp-nvim-lsp"] = {
     loaded = true,
-    path = "/Users/janhoon/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
+    path = "/home/janhoon/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
     url = "https://github.com/hrsh7th/cmp-nvim-lsp"
   },
   ["cmp-nvim-lua"] = {
     loaded = true,
-    path = "/Users/janhoon/.local/share/nvim/site/pack/packer/start/cmp-nvim-lua",
+    path = "/home/janhoon/.local/share/nvim/site/pack/packer/start/cmp-nvim-lua",
     url = "https://github.com/hrsh7th/cmp-nvim-lua"
   },
   ["cmp-path"] = {
     loaded = true,
-    path = "/Users/janhoon/.local/share/nvim/site/pack/packer/start/cmp-path",
+    path = "/home/janhoon/.local/share/nvim/site/pack/packer/start/cmp-path",
     url = "https://github.com/hrsh7th/cmp-path"
   },
   cmp_luasnip = {
     loaded = true,
-    path = "/Users/janhoon/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
+    path = "/home/janhoon/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
   ["copilot.vim"] = {
     loaded = true,
-    path = "/Users/janhoon/.local/share/nvim/site/pack/packer/start/copilot.vim",
+    path = "/home/janhoon/.local/share/nvim/site/pack/packer/start/copilot.vim",
     url = "https://github.com/github/copilot.vim"
   },
   ["friendly-snippets"] = {
     loaded = true,
-    path = "/Users/janhoon/.local/share/nvim/site/pack/packer/start/friendly-snippets",
+    path = "/home/janhoon/.local/share/nvim/site/pack/packer/start/friendly-snippets",
     url = "https://github.com/rafamadriz/friendly-snippets"
   },
   harpoon = {
     loaded = true,
-    path = "/Users/janhoon/.local/share/nvim/site/pack/packer/start/harpoon",
+    path = "/home/janhoon/.local/share/nvim/site/pack/packer/start/harpoon",
     url = "https://github.com/theprimeagen/harpoon"
   },
   ["lsp-zero.nvim"] = {
     loaded = true,
-    path = "/Users/janhoon/.local/share/nvim/site/pack/packer/start/lsp-zero.nvim",
+    path = "/home/janhoon/.local/share/nvim/site/pack/packer/start/lsp-zero.nvim",
     url = "https://github.com/VonHeikemen/lsp-zero.nvim"
   },
   ["lualine.nvim"] = {
     loaded = true,
-    path = "/Users/janhoon/.local/share/nvim/site/pack/packer/start/lualine.nvim",
+    path = "/home/janhoon/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
   },
   ["mason-lspconfig.nvim"] = {
     loaded = true,
-    path = "/Users/janhoon/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
+    path = "/home/janhoon/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
     url = "https://github.com/williamboman/mason-lspconfig.nvim"
   },
   ["mason.nvim"] = {
     loaded = true,
-    path = "/Users/janhoon/.local/share/nvim/site/pack/packer/start/mason.nvim",
+    path = "/home/janhoon/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
   },
   neoformat = {
     loaded = true,
-    path = "/Users/janhoon/.local/share/nvim/site/pack/packer/start/neoformat",
+    path = "/home/janhoon/.local/share/nvim/site/pack/packer/start/neoformat",
     url = "https://github.com/sbdchd/neoformat"
   },
   neotest = {
     loaded = true,
-    path = "/Users/janhoon/.local/share/nvim/site/pack/packer/start/neotest",
+    path = "/home/janhoon/.local/share/nvim/site/pack/packer/start/neotest",
     url = "https://github.com/nvim-neotest/neotest"
   },
   ["neotest-go"] = {
     loaded = true,
-    path = "/Users/janhoon/.local/share/nvim/site/pack/packer/start/neotest-go",
+    path = "/home/janhoon/.local/share/nvim/site/pack/packer/start/neotest-go",
     url = "https://github.com/nvim-neotest/neotest-go"
   },
   ["neotest-vitest"] = {
     loaded = true,
-    path = "/Users/janhoon/.local/share/nvim/site/pack/packer/start/neotest-vitest",
+    path = "/home/janhoon/.local/share/nvim/site/pack/packer/start/neotest-vitest",
     url = "https://github.com/marilari88/neotest-vitest"
   },
   ["nightfox.nvim"] = {
     loaded = true,
-    path = "/Users/janhoon/.local/share/nvim/site/pack/packer/start/nightfox.nvim",
+    path = "/home/janhoon/.local/share/nvim/site/pack/packer/start/nightfox.nvim",
     url = "https://github.com/EdenEast/nightfox.nvim"
   },
   ["nvim-cmp"] = {
     loaded = true,
-    path = "/Users/janhoon/.local/share/nvim/site/pack/packer/start/nvim-cmp",
+    path = "/home/janhoon/.local/share/nvim/site/pack/packer/start/nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
   },
   ["nvim-dap"] = {
     loaded = true,
-    path = "/Users/janhoon/.local/share/nvim/site/pack/packer/start/nvim-dap",
+    path = "/home/janhoon/.local/share/nvim/site/pack/packer/start/nvim-dap",
     url = "https://github.com/mfussenegger/nvim-dap"
   },
   ["nvim-jdtls"] = {
     loaded = true,
-    path = "/Users/janhoon/.local/share/nvim/site/pack/packer/start/nvim-jdtls",
+    path = "/home/janhoon/.local/share/nvim/site/pack/packer/start/nvim-jdtls",
     url = "https://github.com/mfussenegger/nvim-jdtls"
   },
   ["nvim-lspconfig"] = {
     loaded = true,
-    path = "/Users/janhoon/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
+    path = "/home/janhoon/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
   },
   ["nvim-spectre"] = {
     loaded = true,
-    path = "/Users/janhoon/.local/share/nvim/site/pack/packer/start/nvim-spectre",
+    path = "/home/janhoon/.local/share/nvim/site/pack/packer/start/nvim-spectre",
     url = "https://github.com/windwp/nvim-spectre"
   },
   ["nvim-tree.lua"] = {
     loaded = true,
-    path = "/Users/janhoon/.local/share/nvim/site/pack/packer/start/nvim-tree.lua",
+    path = "/home/janhoon/.local/share/nvim/site/pack/packer/start/nvim-tree.lua",
     url = "https://github.com/nvim-tree/nvim-tree.lua"
   },
   ["nvim-treesitter"] = {
     loaded = true,
-    path = "/Users/janhoon/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
+    path = "/home/janhoon/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
   ["nvim-web-devicons"] = {
     loaded = false,
     needs_bufread = false,
-    path = "/Users/janhoon/.local/share/nvim/site/pack/packer/opt/nvim-web-devicons",
+    path = "/home/janhoon/.local/share/nvim/site/pack/packer/opt/nvim-web-devicons",
     url = "https://github.com/kyazdani42/nvim-web-devicons"
   },
   ["packer.nvim"] = {
     loaded = true,
-    path = "/Users/janhoon/.local/share/nvim/site/pack/packer/start/packer.nvim",
+    path = "/home/janhoon/.local/share/nvim/site/pack/packer/start/packer.nvim",
     url = "https://github.com/wbthomason/packer.nvim"
   },
   ["plenary.nvim"] = {
     loaded = true,
-    path = "/Users/janhoon/.local/share/nvim/site/pack/packer/start/plenary.nvim",
+    path = "/home/janhoon/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
   ["starlark.vim"] = {
     loaded = true,
-    path = "/Users/janhoon/.local/share/nvim/site/pack/packer/start/starlark.vim",
+    path = "/home/janhoon/.local/share/nvim/site/pack/packer/start/starlark.vim",
     url = "https://github.com/cappyzawa/starlark.vim"
   },
   ["telescope.nvim"] = {
     loaded = true,
-    path = "/Users/janhoon/.local/share/nvim/site/pack/packer/start/telescope.nvim",
+    path = "/home/janhoon/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
   },
   ["vim-commentary"] = {
     loaded = true,
-    path = "/Users/janhoon/.local/share/nvim/site/pack/packer/start/vim-commentary",
+    path = "/home/janhoon/.local/share/nvim/site/pack/packer/start/vim-commentary",
     url = "https://github.com/tpope/vim-commentary"
   },
   ["vim-fugitive"] = {
     loaded = true,
-    path = "/Users/janhoon/.local/share/nvim/site/pack/packer/start/vim-fugitive",
+    path = "/home/janhoon/.local/share/nvim/site/pack/packer/start/vim-fugitive",
     url = "https://github.com/tpope/vim-fugitive"
   },
   ["vim-helm"] = {
     loaded = false,
     needs_bufread = true,
     only_cond = false,
-    path = "/Users/janhoon/.local/share/nvim/site/pack/packer/opt/vim-helm",
+    path = "/home/janhoon/.local/share/nvim/site/pack/packer/opt/vim-helm",
     url = "https://github.com/towolf/vim-helm"
   }
 }
@@ -249,14 +249,14 @@ vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
 time([[Defining lazy-load filetype autocommands]], true)
-vim.cmd [[au FileType yaml ++once lua require("packer.load")({'vim-helm'}, { ft = "yaml" }, _G.packer_plugins)]]
 vim.cmd [[au FileType helm ++once lua require("packer.load")({'vim-helm'}, { ft = "helm" }, _G.packer_plugins)]]
+vim.cmd [[au FileType yaml ++once lua require("packer.load")({'vim-helm'}, { ft = "yaml" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
 vim.cmd("augroup END")
 vim.cmd [[augroup filetypedetect]]
-time([[Sourcing ftdetect script at: /Users/janhoon/.local/share/nvim/site/pack/packer/opt/vim-helm/ftdetect/helm.vim]], true)
-vim.cmd [[source /Users/janhoon/.local/share/nvim/site/pack/packer/opt/vim-helm/ftdetect/helm.vim]]
-time([[Sourcing ftdetect script at: /Users/janhoon/.local/share/nvim/site/pack/packer/opt/vim-helm/ftdetect/helm.vim]], false)
+time([[Sourcing ftdetect script at: /home/janhoon/.local/share/nvim/site/pack/packer/opt/vim-helm/ftdetect/helm.vim]], true)
+vim.cmd [[source /home/janhoon/.local/share/nvim/site/pack/packer/opt/vim-helm/ftdetect/helm.vim]]
+time([[Sourcing ftdetect script at: /home/janhoon/.local/share/nvim/site/pack/packer/opt/vim-helm/ftdetect/helm.vim]], false)
 vim.cmd("augroup END")
 
 _G._packer.inside_compile = false
