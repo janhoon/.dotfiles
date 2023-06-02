@@ -26,7 +26,7 @@ lsp.configure('jsonls', {
 
 lsp.configure('gopls', {
     cmd_env = {
-        GOFLAGS = "-tags=integration,unit",
+        GOFLAGS = "-tags=integration,unit,e2e",
     },
 })
 
