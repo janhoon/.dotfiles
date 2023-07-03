@@ -1,4 +1,4 @@
-export ZSH="/Users/janhoon/.oh-my-zsh"
+export ZSH="/Users/jan.hoon/.oh-my-zsh"
 
 ZSH_THEME="robbyrussell"
 
@@ -30,7 +30,7 @@ eval $(gh completion -s zsh)
 eval $(thefuck --alias)
 
 export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin:/usr/local/go/bin:/$HOME/bin
+export PATH=$PATH:$GOPATH/bin:/usr/local/go/bin:/$HOME/bin:$HOME/.local/bin
 export COLORTERM=truecolor
 export KIND_EXPERIMENTAL_PROVIDER=podman
 
