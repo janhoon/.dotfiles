@@ -1,3 +1,6 @@
+vim.g.loaded_netrwPlugin = 1
+vim.g.loaded_netrw = 1
+vim.opt.termguicolors = true
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
@@ -26,7 +29,12 @@ require('lazy').setup({
   -- Surround things
   'tpope/vim-surround',
 
-  -- NOTE: This is where your plugins related to LSP can be installed.
+  -- Scheeeeemas
+  'b0o/schemastore.nvim',
+
+  -- format
+  'sbdchd/neoformat',
+
   --  The configuration is done below. Search for lspconfig to find it below.
   {
     -- LSP Configuration & Plugins
@@ -37,7 +45,6 @@ require('lazy').setup({
       'williamboman/mason-lspconfig.nvim',
 
       -- Useful status updates for LSP
-      -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
       { 'j-hui/fidget.nvim',       tag = 'legacy', opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
@@ -88,11 +95,11 @@ require('lazy').setup({
   },
 
   {
-    -- Theme inspired by Atom
-    'navarasu/onedark.nvim',
+    -- Theme
+    'catppuccin/nvim',
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme 'onedark'
+      vim.cmd.colorscheme 'catppuccin-mocha'
     end,
   },
 
@@ -103,7 +110,7 @@ require('lazy').setup({
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'onedark',
+        theme = 'catppuccin-mocha',
         component_separators = '|',
         section_separators = '',
       },
@@ -154,7 +161,25 @@ require('lazy').setup({
     dependencies = {
       'nvim-lua/plenary.nvim',
     },
-  }
+  },
+
+  -- Nvim Tree
+  { 'kyazdani42/nvim-tree.lua', opts = {} },
+
+  -- NeoTest
+  {
+    'nvim-neotest/neotest',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-treesitter/nvim-treesitter',
+      'antoinemadec/FixCursorHold.nvim',
+      'nvim-neotest/neotest-go',
+    },
+    opts = {}
+  },
+
+  -- close pairs
+  { 'windwp/nvim-autopairs',    opts = {}, event = 'InsertEnter' },
 }, {})
 
 -- [[ Setting options ]]
@@ -228,6 +253,45 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
+-- [[ Configure Harpoon ]]
+require('harpoon').setup({
+  global_settings = {
+    save_on_toggle = true,
+    save_on_change = true,
+  },
+})
+
+vim.keymap.set('n', '<leader>hh', require('harpoon.ui').toggle_quick_menu, { desc = '[H]arpoon Toggle [H]arpoon menu' })
+vim.keymap.set('n', '<leader>ha', require('harpoon.mark').add_file, { desc = '[H]arpoon Navigate to [A] file' })
+vim.keymap.set('n', '<leader>H', function() require('harpoon.ui').nav_file(1) end,
+  { desc = 'Harpoon navigate to file 1' })
+vim.keymap.set('n', '<leader>J', function() require('harpoon.ui').nav_file(2) end,
+  { desc = 'Harpoon navigate to file 2' })
+vim.keymap.set('n', '<leader>K', function() require('harpoon.ui').nav_file(3) end,
+  { desc = 'Harpoon navigate to file 3' })
+vim.keymap.set('n', '<leader>L', function() require('harpoon.ui').nav_file(4) end,
+  { desc = 'Harpoon navigate to file 4' })
+
+-- [[ Configure NvimTree ]]
+require('nvim-tree').setup {
+  sort_by = 'case_sensitive',
+  view = {
+    float = {
+      enable = true,
+    },
+    width = 30,
+    number = true,
+    relativenumber = true,
+  },
+  renderer = {
+    group_empty = true,
+  },
+  git = {
+    ignore = false,
+  }
+}
+vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>', { desc = 'Nvimtree Explore' })
+
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup {
@@ -264,8 +328,13 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 vim.keymap.set('n', '<leader>sb', require('telescope.builtin').git_branches, { desc = '[S]earch [B]ranches' })
 
 -- [[ Configure Treesitter ]]
+
+-- Folds can use treeesitter
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+
 -- See `:help nvim-treesitter`
-require('nvim-treesitter.install').compilers = { 'clang' } -- fix for NixOS requires llvmPackages_9.libcxxClang
+-- require('nvim-treesitter.install').compilers = { 'clang' } -- fix for NixOS requires llvmPackages_9.libcxxClang
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
   ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim' },
@@ -333,7 +402,7 @@ require('nvim-treesitter.configs').setup {
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
+-- vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- [[ Configure LSP ]]
@@ -373,7 +442,8 @@ local on_attach = function(_, bufnr)
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
-  nmap('<leader>f', vim.lsp.buf.format, '[F]ormat current buffer with LSP')
+  -- use neofrmat
+  nmap('<leader>f', require('neoformat').format, '[F]ormat current buffer with Neoformat')
 end
 
 -- Enable the following language servers
@@ -383,10 +453,38 @@ end
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
   -- clangd = {},
-  -- gopls = {},
   -- pyright = {},
   -- rust_analyzer = {},
   -- tsserver = {},
+  --
+  yamlls = {
+    settings = {
+      yaml = {
+        schemas = {
+          require('schemastore').yaml.schemas(),
+        },
+      },
+    },
+  },
+
+  jsonls = {
+    settings = {
+      yaml = {
+        schemas = {
+          require('schemastore').json.schemas(),
+          validate = { enable = true },
+        },
+      },
+    },
+  },
+
+  gopls = {
+    cmd_env = {
+      GO111MODULE = 'on',
+      CGO_ENABLED = '0',
+      GOFLAGS = 'unit,integration,e2e,acceptance',
+    },
+  },
 
   lua_ls = {
     Lua = {
@@ -397,7 +495,9 @@ local servers = {
 }
 
 -- Setup neovim lua configuration
-require('neodev').setup()
+require('neodev').setup({
+  library = { plugins = { 'neotest' }, types = true },
+})
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -465,3 +565,28 @@ cmp.setup {
     { name = 'luasnip' },
   },
 }
+
+-- [[ Configure NeoTest ]]
+require('neotest').setup {
+  adapters = {
+    require("neotest-go")({
+      experimental = {
+        test_table = true,
+      },
+      args = { "-tags=unit,integration,acceptance,e2e" },
+    })
+  }
+}
+
+vim.keymap.set('n', '<leader>tn', function() require('neotest').run.run() end,
+  { desc = 'Run nearest test' })
+vim.keymap.set('n', '<leader>tf', function() require('neotest').run.run(vim.fn.expand('%')) end,
+  { desc = 'Run current file' })
+vim.keymap.set('n', '<leader>to', function() require('neotest').output.open() end,
+  { desc = 'Toggle output panel' })
+
+
+-- [[ Configure autopairs ]]
+require('nvim-autopairs').setup({
+  disable_filetype = { "TelescopePrompt" },
+})
