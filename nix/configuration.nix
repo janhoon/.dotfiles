@@ -1,9 +1,15 @@
 { config, pkgs, ... }:
 
+let
+  unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
+in
+
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      # ./sway.nix
+      ./hyprland.nix
       <home-manager/nixos>
     ];
 
@@ -36,30 +42,26 @@
 
     enable = true;
 
-    desktopManager = {
-      xterm.enable = false;
-    };
+    displayManager.gdm.enable = true;
+    displayManager.gdm.wayland = true;
+    desktopManager.xterm.enable = false;
+    windowManager.awesome.enable = true;
+    windowManager.i3.enable = true;
 
-    displayManager = {
-      defaultSession = "none+i3";
-    };
-
-    windowManager.i3 = {
-      enable = true;
-      extraPackages = with pkgs; [
-        dmenu
-        i3status
-        i3lock
-      ];
-    };
+    resolutions = [
+    	{ x = 2560; y = 1440; }
+    	{ x = 1920; y = 1200; }
+    ];
   };
 
   virtualisation.docker.enable = true;
 
+  hardware.opengl.enable = true;
+
   fonts = {
     enableDefaultFonts = true;
     fonts = with pkgs; [ 
-      (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+      (nerdfonts.override { fonts = [ "JetBrainsMono" "Hack" ]; })
     ];
 
     fontconfig = {
@@ -85,12 +87,18 @@
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
+    unstable.mesa
     vim
     st
+    kitty
     firefox
     chromium
+    wayland
   ];
   environment.pathsToLink = [ "/libexec" ];
+  environment.variables = rec {
+    HYPRLAND_LOG_WLR = "1";
+  };
 
   system.stateVersion = "22.11";
 }
