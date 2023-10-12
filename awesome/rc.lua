@@ -55,7 +55,7 @@ end
 beautiful.init(theme_path)
 
 -- This is used later as the default terminal and editor to run.
-terminal = "kitty"
+terminal = "gnome-terminal"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -167,7 +167,7 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({ "rand", "web", "term", "ext" }, s, awful.layout.layouts[1])
+    awful.tag({ "home", "web", "term", "slack", "ext5", "ext6","ext7"}, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()

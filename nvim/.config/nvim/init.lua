@@ -168,18 +168,42 @@ require('lazy').setup({
 
   -- NeoTest
   {
-    'nvim-neotest/neotest',
+    "nvim-neotest/neotest",
     dependencies = {
-      'nvim-lua/plenary.nvim',
-      'nvim-treesitter/nvim-treesitter',
-      'antoinemadec/FixCursorHold.nvim',
-      'nvim-neotest/neotest-go',
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "antoinemadec/FixCursorHold.nvim",
+      "nvim-neotest/neotest-go",
     },
-    opts = {}
+    config = function()
+    -- get neotest namespace (api call creates or returns namespace)
+    local neotest_ns = vim.api.nvim_create_namespace("neotest")
+    vim.diagnostic.config({
+      virtual_text = {
+        format = function(diagnostic)
+          local message =
+            diagnostic.message:gsub("\n", " "):gsub("\t", " "):gsub("%s+", " "):gsub("^%s+", "")
+          return message
+        end,
+      },
+    }, neotest_ns)
+    require("neotest").setup({
+      adapters = {
+        require("neotest-go")({
+          experimental = {
+            test_table = true,
+          },
+          args = { "-tags=unit,integration,acceptance,e2e" },
+        }),
+      },
+    })
+  end,
   },
-
   -- close pairs
   { 'windwp/nvim-autopairs',    opts = {}, event = 'InsertEnter' },
+
+  -- helm needs to work
+  {'towolf/vim-helm'}
 }, {})
 
 -- [[ Setting options ]]
@@ -443,7 +467,7 @@ local on_attach = function(_, bufnr)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
   -- use neofrmat
-  nmap('<leader>f', require('neoformat').format, '[F]ormat current buffer with Neoformat')
+  nmap('<leader>f', ":Neoformat<CR>", 'Format current buffer with Neoformat')
 end
 
 -- Enable the following language servers
@@ -479,10 +503,12 @@ local servers = {
   },
 
   gopls = {
-    cmd_env = {
-      GO111MODULE = 'on',
-      CGO_ENABLED = '0',
-      GOFLAGS = 'unit,integration,e2e,acceptance',
+    gopls = {
+      analyses = {
+        unusedparams = true,
+      },
+      staticcheck = true,
+      buildFlags = { '-tags=unit,integration,acceptance,e2e' },
     },
   },
 
@@ -567,16 +593,16 @@ cmp.setup {
 }
 
 -- [[ Configure NeoTest ]]
-require('neotest').setup {
-  adapters = {
-    require("neotest-go")({
-      experimental = {
-        test_table = true,
-      },
-      args = { "-tags=unit,integration,acceptance,e2e" },
-    })
-  }
-}
+-- require('neotest').setup {
+--   adapters = {
+--     require("neotest-go")({
+--       experimental = {
+--         test_table = true,
+--       },
+--       args = { "-tags=unit,integration,acceptance,e2e" },
+--     })
+--   }
+-- }
 
 vim.keymap.set('n', '<leader>tn', function() require('neotest').run.run() end,
   { desc = 'Run nearest test' })
