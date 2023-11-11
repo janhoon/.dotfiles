@@ -35,6 +35,9 @@ require('lazy').setup({
   -- format
   'sbdchd/neoformat',
 
+  -- debugger, wish me luck
+  'mfussenegger/nvim-dap',
+
   --  The configuration is done below. Search for lspconfig to find it below.
   {
     -- LSP Configuration & Plugins
@@ -117,17 +120,6 @@ require('lazy').setup({
     },
   },
 
-  {
-    -- Add indentation guides even on blank lines
-    'lukas-reineke/indent-blankline.nvim',
-    -- Enable `lukas-reineke/indent-blankline.nvim`
-    -- See `:help indent_blankline.txt`
-    opts = {
-      char = '┊',
-      show_trailing_blankline_indent = false,
-    },
-  },
-
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim',         opts = {} },
 
@@ -174,6 +166,7 @@ require('lazy').setup({
       "nvim-treesitter/nvim-treesitter",
       "antoinemadec/FixCursorHold.nvim",
       "nvim-neotest/neotest-go",
+      "rcasia/neotest-java",
     },
     config = function()
     -- get neotest namespace (api call creates or returns namespace)
@@ -195,6 +188,9 @@ require('lazy').setup({
           },
           args = { "-tags=unit,integration,acceptance,e2e" },
         }),
+        require("neotest-java")({
+          ignore_wrapper = true, -- whether to ignore maven/gradle wrapper
+        })
       },
     })
   end,
@@ -203,7 +199,10 @@ require('lazy').setup({
   { 'windwp/nvim-autopairs',    opts = {}, event = 'InsertEnter' },
 
   -- helm needs to work
-  {'towolf/vim-helm'}
+  {'towolf/vim-helm'},
+
+  -- starlark for tilt
+  'cappyzawa/starlark.vim'
 }, {})
 
 -- [[ Setting options ]]
@@ -285,15 +284,15 @@ require('harpoon').setup({
   },
 })
 
-vim.keymap.set('n', '<leader>hh', require('harpoon.ui').toggle_quick_menu, { desc = '[H]arpoon Toggle [H]arpoon menu' })
-vim.keymap.set('n', '<leader>ha', require('harpoon.mark').add_file, { desc = '[H]arpoon Navigate to [A] file' })
-vim.keymap.set('n', '<leader>H', function() require('harpoon.ui').nav_file(1) end,
+vim.keymap.set('n', '<C-e>', require('harpoon.ui').toggle_quick_menu, { desc = '[H]arpoon Toggle [H]arpoon menu' })
+vim.keymap.set('n', '<C-a>', require('harpoon.mark').add_file, { desc = 'Harpoon add [A] mark' })
+vim.keymap.set('n', 'H', function() require('harpoon.ui').nav_file(1) end,
   { desc = 'Harpoon navigate to file 1' })
-vim.keymap.set('n', '<leader>J', function() require('harpoon.ui').nav_file(2) end,
+vim.keymap.set('n', 'J', function() require('harpoon.ui').nav_file(2) end,
   { desc = 'Harpoon navigate to file 2' })
-vim.keymap.set('n', '<leader>K', function() require('harpoon.ui').nav_file(3) end,
+vim.keymap.set('n', 'K', function() require('harpoon.ui').nav_file(3) end,
   { desc = 'Harpoon navigate to file 3' })
-vim.keymap.set('n', '<leader>L', function() require('harpoon.ui').nav_file(4) end,
+vim.keymap.set('n', 'L', function() require('harpoon.ui').nav_file(4) end,
   { desc = 'Harpoon navigate to file 4' })
 
 -- [[ Configure NvimTree ]]
@@ -303,7 +302,11 @@ require('nvim-tree').setup {
     float = {
       enable = true,
     },
-    width = 30,
+    width = {
+      min = 30,
+      max = 60,
+      padding = 1
+    },
     number = true,
     relativenumber = true,
   },
@@ -592,18 +595,6 @@ cmp.setup {
   },
 }
 
--- [[ Configure NeoTest ]]
--- require('neotest').setup {
---   adapters = {
---     require("neotest-go")({
---       experimental = {
---         test_table = true,
---       },
---       args = { "-tags=unit,integration,acceptance,e2e" },
---     })
---   }
--- }
-
 vim.keymap.set('n', '<leader>tn', function() require('neotest').run.run() end,
   { desc = 'Run nearest test' })
 vim.keymap.set('n', '<leader>tf', function() require('neotest').run.run(vim.fn.expand('%')) end,
@@ -616,3 +607,21 @@ vim.keymap.set('n', '<leader>to', function() require('neotest').output.open() en
 require('nvim-autopairs').setup({
   disable_filetype = { "TelescopePrompt" },
 })
+
+-- [[De the Buggers]]
+-- vim.highlight.create('DapBreakpoint', { ctermbg=0, guifg='#993939', guibg='#31353f' }, false)
+-- vim.highlight.create('DapLogPoint', { ctermbg=0, guifg='#61afef', guibg='#31353f' }, false)
+-- vim.highlight.create('DapStopped', { ctermbg=0, guifg='#98c379', guibg='#31353f' }, false)
+
+vim.fn.sign_define('DapBreakpoint', { text='', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl='DapBreakpoint' })
+vim.fn.sign_define('DapBreakpointCondition', { text='', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl='DapBreakpoint' })
+vim.fn.sign_define('DapBreakpointRejected', { text='', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl= 'DapBreakpoint' })
+vim.fn.sign_define('DapLogPoint', { text='', texthl='DapLogPoint', linehl='DapLogPoint', numhl= 'DapLogPoint' })
+vim.fn.sign_define('DapStopped', { text='', texthl='DapStopped', linehl='DapStopped', numhl= 'DapStopped' })
+
+vim.keymap.set('n', '<leader>dc', function() require('dap').continue() end, {desc = "[D]ap [C]ontinue"})
+vim.keymap.set('n', '<leader>dl', function() require('dap').run_last() end, {desc = "[D]ap run [L]ast"})
+vim.keymap.set('n', '<leader>db', function() require('dap').toggle_breakpoint() end, {desc = "[D]ap [B]reakpoint"})
+vim.keymap.set('n', '<leader>dI', function() require('dap').step_into() end, {desc = "[D]ap step [I]n"})
+vim.keymap.set('n', '<leader>dO', function() require('dap').step_out() end, {desc = "[D]ap step [O]ut"})
+vim.keymap.set('n', '<leader>di', function() require('dap').step_over() end, {desc = "[D]ap step [O]ver"})
