@@ -1,4 +1,4 @@
-export ZSH="/Users/jan.hoon/.oh-my-zsh"
+export ZSH="/Users/janhoon/.oh-my-zsh"
 
 ZSH_THEME="robbyrussell"
 
@@ -57,12 +57,25 @@ unset __conda_setup
 autoload -U compinit
 compinit -i
 
-# eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-source /Users/janhoon/.gvm/scripts/gvm
-
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
 export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
+
+alias dbt=meltano invoke dbt-redshift
+alias dbt="meltano invoke dbt-redshift"
+alias airflow="meltano invoke airflow"
+alias activate-venv=". .venv/bin/activate"
+alias airflow="meltano invoke airflow"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/janhoon/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/janhoon/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/janhoon/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/janhoon/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+alias gam="/Users/janhoon/bin/gam/gam"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
