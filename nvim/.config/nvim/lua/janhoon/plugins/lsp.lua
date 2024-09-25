@@ -17,7 +17,6 @@ return {
 			"b0o/SchemaStore.nvim",
 		},
 		config = function()
-			print("Loading LSP")
 			require("neodev").setup({
 				-- library = {
 				--   plugins = { "nvim-dap-ui" },
@@ -54,16 +53,12 @@ return {
 						semanticTokensProvider = vim.NIL,
 					},
 				},
-				rust_analyzer = true,
-				svelte = true,
-				templ = true,
-				cssls = true,
-				taplo = true,
 
 				pyright = true,
+				terraformls = true,
 
 				-- Probably want to disable formatting for this lang server
-				tsserver = {
+				ts_ls = {
 					server_capabilities = {
 						documentFormattingProvider = false,
 					},

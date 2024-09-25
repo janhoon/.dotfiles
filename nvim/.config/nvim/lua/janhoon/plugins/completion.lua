@@ -12,7 +12,6 @@ return { -- Autocompletion
 			"saadparwaiz1/cmp_luasnip",
 		},
 		config = function()
-			print("Loading completion")
 			require("janhoon.completion")
 		end,
 	},

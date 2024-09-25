@@ -68,3 +68,5 @@ vim.opt.scrolloff = 10
 vim.opt.hlsearch = true
 
 vim.g.db_ui_use_postgres_views = 0
+
+vim.opt.laststatus = 3

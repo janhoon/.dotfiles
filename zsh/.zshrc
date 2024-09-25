@@ -41,7 +41,7 @@ export NVM_DIR="$HOME/.nvm"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/opt/homebrew/Caskroom/miniconda/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/opt/homebrew/Caskroom/miniconda/base/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
@@ -79,3 +79,9 @@ if [ -f '/Users/janhoon/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then .
 alias gam="/Users/janhoon/bin/gam/gam"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+if [ -f ~/.env ]; then
+    cat ~/.env | while read line; do
+        export $line
+    done
+fi
