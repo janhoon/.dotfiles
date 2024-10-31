@@ -7,7 +7,9 @@ return {
 		"antoinemadec/FixCursorHold.nvim",
 		"nvim-treesitter/nvim-treesitter",
 		"nvim-neotest/neotest-jest",
+		"marilari88/neotest-vitest",
 		"nvim-neotest/neotest-python",
+		{ "fredrikaverpil/neotest-golang", version = "*" },
 	},
 	config = function()
 		vim.keymap.set("n", "<leader>tn", function()
@@ -28,10 +30,12 @@ return {
 
 		require("neotest").setup({
 			adapters = {
-				require("neotest-jest")({}),
+				require("neotest-jest"),
+				require("neotest-vitest"),
 				require("neotest-python")({
 					python = ".venv/bin/python",
 				}),
+				require("neotest-golang"),
 			},
 		})
 	end,
