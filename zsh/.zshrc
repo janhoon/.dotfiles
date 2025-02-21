@@ -32,8 +32,6 @@ eval $(thefuck --alias)
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin:/usr/local/go/bin:/$HOME/bin:$HOME/.local/bin
 export COLORTERM=truecolor
-export KIND_EXPERIMENTAL_PROVIDER=podman
-
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -42,24 +40,11 @@ export NVM_DIR="$HOME/.nvm"
 autoload -U compinit
 compinit -i
 
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-
-alias dbt=meltano invoke dbt-redshift
-alias dbt="meltano invoke dbt-redshift"
-alias airflow="meltano invoke airflow"
-alias activate-venv=". .venv/bin/activate"
-alias airflow="meltano invoke airflow"
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/janhoon/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/janhoon/Downloads/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/janhoon/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/janhoon/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
-
-alias gam="/Users/janhoon/bin/gam/gam"
+# alias dbt=meltano invoke dbt-redshift
+# alias dbt="meltano invoke dbt-redshift"
+# alias airflow="meltano invoke airflow"
+# alias activate-venv=". .venv/bin/activate"
+# alias airflow="meltano invoke airflow"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -69,4 +54,4 @@ if [ -f ~/.env ]; then
     done
 fi
 
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+alias dbt="meltano invoke dbt-redshift"
