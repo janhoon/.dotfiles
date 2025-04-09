@@ -6,6 +6,9 @@ vim.g.have_nerd_font = true
 vim.opt.number = true
 vim.opt.relativenumber = true
 
+-- Set vim shell to zsh
+vim.o.shell = "/bin/zsh"
+
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = "a"
 
@@ -70,3 +73,6 @@ vim.opt.hlsearch = true
 vim.g.db_ui_use_postgres_views = 0
 
 vim.opt.laststatus = 3
+
+-- set theme
+vim.cmd.colorscheme("catppuccin-mocha")

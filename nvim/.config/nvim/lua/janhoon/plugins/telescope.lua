@@ -24,6 +24,9 @@ return { -- Fuzzy Finder (files, lsp, etc)
 	},
 	config = function()
 		require("telescope").setup({
+			defaults = {
+				find_command = 'rg --files --hidden --follow -g "!node_modules/*"',
+			},
 			extensions = {
 				["ui-select"] = {
 					require("telescope.themes").get_dropdown(),
