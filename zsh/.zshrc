@@ -17,17 +17,8 @@ znap source zsh-users/zsh-syntax-highlighting
 source $ZSH/oh-my-zsh.sh
 
 alias vim=nvim
-alias sleeplock="i3lock && echo mem > /sys/power/state"
 alias k=kubectl
 alias tf=terraform
-alias cona='conda activate ${PWD##*/}'
-alias conc='conda create -n ${PWD##*/}'
-alias gocov="go test --short -coverprofile=coverage.out -tags=unit ./... && go tool cover -html=coverage.out && rm coverage.out"
-
-eval $(kubectl completion zsh)
-eval $(gh completion -s zsh)
- 
-eval $(thefuck --alias)
 
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin:/usr/local/go/bin:/$HOME/bin:$HOME/.local/bin
@@ -40,12 +31,6 @@ export NVM_DIR="$HOME/.nvm"
 autoload -U compinit
 compinit -i
 
-# alias dbt=meltano invoke dbt-redshift
-# alias dbt="meltano invoke dbt-redshift"
-# alias airflow="meltano invoke airflow"
-# alias activate-venv=". .venv/bin/activate"
-# alias airflow="meltano invoke airflow"
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 if [ -f ~/.env ]; then
@@ -54,4 +39,10 @@ if [ -f ~/.env ]; then
     done
 fi
 
-alias dbt="meltano invoke dbt-redshift"
+(cat ~/.cache/wal/sequences &)
+
+# Alternative (blocks terminal for 0-3ms)
+cat ~/.cache/wal/sequences
+
+# To add support for TTYs this line can be optionally added.
+source ~/.cache/wal/colors-tty.sh
