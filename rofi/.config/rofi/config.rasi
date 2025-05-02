@@ -1,6 +1,10 @@
 @import "~/.cache/wal/colors-rofi-dark"
 
 configuration {
+    kb-mode-next: "Tab";
+    kb-mode-previous: "Shift+Tab";
+    kb-row-tab: "";  /* Unbind Tab from row selection */
+    kb-element-next: "";
     show-icons: true;
     icon-theme: "Papirus";
     modi: "drun,run,window,filebrowser";
