@@ -11,13 +11,23 @@ return {
 		behavior = {
 			enable_cursor_planning_mode = true,
 		},
-		vendors = {
+		providers = {
 			groq = {
 				__inherited_from = "openai",
 				api_key_name = "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",
 				endpoint = "https://api.groq.com/openai/v1/",
 				model = "llama-3.3-70b-versatile",
 				max_tokens = 32768, -- remember to increase this value, otherwise it will stop generating halfway
+			},
+			claude = {
+				endpoint = "https://api.anthropic.com",
+				model = "claude-sonnet-4-20250514",
+				timeout = 30000, -- Timeout in milliseconds
+				-- disable_tools = true, -- disable tools!
+				extra_request_body = {
+					temperature = 0,
+					max_tokens = 4096,
+				},
 			},
 		},
 		behaviour = {
